@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# 🔍 Vérification de la qualité du code
+./scripts/check-code-quality.sh
+
+# ✨ Formatage avec lint-staged (ESLint + Prettier)
+pnpm exec lint-staged
+
+# 🧪 Tests
+pnpm test

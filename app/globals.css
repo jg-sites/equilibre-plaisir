@@ -1,26 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap");
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core palette - Sage & Earth tones */
+  --sage: 95 25% 56%;
+  --sage-light: 95 20% 75%;
+  --sage-dark: 95 30% 35%;
+  --beige: 40 33% 94%;
+  --beige-warm: 35 30% 90%;
+  --terracotta: 30 30% 65%;
+  --terracotta-light: 30 35% 80%;
+  --off-white: 40 20% 98%;
+  --forest: 95 35% 25%;
+
+  --background: 40 20% 98%;
+  --foreground: 95 35% 20%;
+
+  --card: 40 33% 96%;
+  --card-foreground: 95 35% 20%;
+
+  --popover: 40 20% 98%;
+  --popover-foreground: 95 35% 20%;
+
+  --primary: 95 25% 56%;
+  --primary-foreground: 40 20% 98%;
+
+  --secondary: 35 30% 90%;
+  --secondary-foreground: 95 35% 25%;
+
+  --muted: 40 20% 92%;
+  --muted-foreground: 95 15% 40%;
+
+  --accent: 30 30% 65%;
+  --accent-foreground: 40 20% 98%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 40 20% 88%;
+  --input: 40 20% 88%;
+  --ring: 95 25% 56%;
+
+  --radius: 1rem;
+
+  /* Custom tokens */
+  --shadow-soft: 0 4px 20px -4px hsl(95 25% 56% / 0.15);
+  --shadow-card: 0 8px 30px -8px hsl(95 25% 56% / 0.12);
+  --shadow-elevated: 0 20px 50px -12px hsl(95 25% 56% / 0.2);
+
+  --gradient-hero: linear-gradient(135deg, hsl(40 33% 94%) 0%, hsl(40 20% 98%) 50%, hsl(95 20% 95%) 100%);
+  --gradient-sage: linear-gradient(135deg, hsl(95 25% 56%) 0%, hsl(95 30% 45%) 100%);
+  --gradient-warm: linear-gradient(180deg, hsl(40 33% 94%) 0%, hsl(40 20% 98%) 100%);
+}
+
+.dark {
+  --background: 95 35% 10%;
+  --foreground: 40 20% 95%;
+  --card: 95 30% 15%;
+  --card-foreground: 40 20% 95%;
+  --primary: 95 25% 60%;
+  --primary-foreground: 95 35% 10%;
+  --secondary: 95 20% 20%;
+  --secondary-foreground: 40 20% 95%;
+  --muted: 95 20% 18%;
+  --muted-foreground: 40 15% 65%;
+  --accent: 30 30% 55%;
+  --accent-foreground: 40 20% 98%;
+  --border: 95 20% 20%;
+  --input: 95 20% 20%;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  /* Colors */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  /* Custom colors */
+  --color-sage: hsl(var(--sage));
+  --color-sage-light: hsl(var(--sage-light));
+  --color-sage-dark: hsl(var(--sage-dark));
+  --color-beige: hsl(var(--beige));
+  --color-beige-warm: hsl(var(--beige-warm));
+  --color-terracotta: hsl(var(--terracotta));
+  --color-terracotta-light: hsl(var(--terracotta-light));
+  --color-off-white: hsl(var(--off-white));
+  --color-forest: hsl(var(--forest));
+
+  /* Fonts */
+  --font-sans: "DM Sans", sans-serif;
+  --font-serif: "Fraunces", serif;
   --font-mono: var(--font-geist-mono);
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) - 0.5rem);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 0.25rem);
+  --radius-xl: calc(var(--radius) + 0.5rem);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+/* Component utilities */
+.section-padding {
+  padding: 4rem 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 6rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding: 8rem 3rem;
+  }
+}
+
+.container-narrow {
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-wide {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gradient-hero {
+  background: var(--gradient-hero);
+}
+
+.gradient-sage {
+  background: var(--gradient-sage);
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-elevated {
+  box-shadow: var(--shadow-elevated);
+}
+
+/* Animations */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 hsl(95 25% 56% / 0.4);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 12px hsl(95 25% 56% / 0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2.5s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Marquee animations */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration) linear infinite;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
 }

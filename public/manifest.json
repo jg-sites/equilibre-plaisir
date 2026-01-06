@@ -1,0 +1,17 @@
+{
+  "name": "Julien - Diététicien Nutritionniste",
+  "short_name": "Julien Diététicien",
+  "description": "Diététicien nutritionniste diplômé en centre Bretagne. Accompagnement personnalisé pour retrouver le plaisir de manger.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAF8",
+  "theme_color": "#87A878",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}

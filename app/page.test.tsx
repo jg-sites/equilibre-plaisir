@@ -3,8 +3,9 @@ import { render, screen } from "@testing-library/react"
 import HomePage from "./page"
 
 describe("HomePage", () => {
-  it("affiche le titre", () => {
+  it("affiche le nom du diététicien", () => {
     render(<HomePage />)
-    expect(screen.getByText("Next SaaS Starter")).toBeInTheDocument()
+    const julienElements = screen.getAllByText("Julien")
+    expect(julienElements.length).toBeGreaterThan(0)
   })
 })

@@ -1,88 +1,84 @@
 "use client"
 
-import { ExternalLink } from "lucide-react"
+import Image, { StaticImageData } from "next/image"
 
+import logoAfdn from "@/components/assets/partenaires-afdn.png"
+import logoAnses from "@/components/assets/partenaires-anses.png"
+import logoCerin from "@/components/assets/partenaires-cerin.png"
+import logoMangerBouger from "@/components/assets/partenaires-mangerbouger.png"
+import logoProduitsLaitiers from "@/components/assets/partenaires-produitslaitiers.png"
+import logoSpf from "@/components/assets/partenaires-spf.png"
 import { Marquee } from "@/components/ui/marquee"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 const trustPartners = [
   {
     name: "Manger Bouger",
     description: "Programme National Nutrition Santé",
     url: "https://www.mangerbouger.fr/",
-    initials: "MB",
-    bgColor: "bg-[#95C11F]/15",
-    textColor: "text-[#95C11F]",
+    logo: logoMangerBouger,
   },
   {
     name: "Les Produits Laitiers",
     description: "Informations nutritionnelles",
     url: "https://www.produits-laitiers.com/",
-    initials: "PL",
-    bgColor: "bg-[#0072BC]/15",
-    textColor: "text-[#0072BC]",
+    logo: logoProduitsLaitiers,
   },
   {
     name: "AFDN",
-    description: "Assoc. Française des Diététiciens",
+    description: "Association Française des Diététiciens Nutritionnistes",
     url: "https://www.afdn.org/",
-    initials: "AF",
-    bgColor: "bg-[#E30613]/15",
-    textColor: "text-[#E30613]",
+    logo: logoAfdn,
   },
   {
     name: "CERIN",
-    description: "Recherche & Information Nutrition",
+    description: "Centre de Recherche et d'Information Nutritionnelles",
     url: "https://www.cerin.org/",
-    initials: "CE",
-    bgColor: "bg-[#00A19A]/15",
-    textColor: "text-[#00A19A]",
+    logo: logoCerin,
   },
   {
     name: "ANSES",
-    description: "Agence de sécurité sanitaire",
+    description: "Agence nationale de sécurité sanitaire",
     url: "https://www.anses.fr/",
-    initials: "AN",
-    bgColor: "bg-[#003D7C]/15",
-    textColor: "text-[#003D7C]",
+    logo: logoAnses,
   },
   {
     name: "Santé Publique France",
-    description: "Prévention & promotion santé",
+    description: "Prévention et promotion de la santé",
     url: "https://www.santepubliquefrance.fr/",
-    initials: "SPF",
-    bgColor: "bg-[#E94E1B]/15",
-    textColor: "text-[#E94E1B]",
+    logo: logoSpf,
   },
 ]
 
-type TrustPartner = (typeof trustPartners)[0]
+type TrustPartner = {
+  name: string
+  description: string
+  url: string
+  logo: StaticImageData
+}
 
-const TrustCard = ({ name, description, url, initials, bgColor, textColor }: TrustPartner) => {
+const TrustLogo = ({ name, description, url, logo }: TrustPartner) => {
   return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group border-sage/10 bg-background/80 hover:border-sage/25 hover:bg-background relative flex h-[72px] w-[280px] items-center gap-4 rounded-2xl border px-4 py-3 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
-    >
-      {/* Logo badge */}
-      <div
-        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${bgColor} transition-transform duration-300 group-hover:scale-105`}
-      >
-        <span className={`text-xs font-bold tracking-tight ${textColor}`}>{initials}</span>
-      </div>
-
-      {/* Text content */}
-      <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-        <span className="text-foreground/90 group-hover:text-foreground truncate text-sm font-semibold transition-colors duration-300">
-          {name}
-        </span>
-        <span className="text-muted-foreground/80 truncate text-xs">{description}</span>
-      </div>
-
-      {/* External link icon */}
-      <ExternalLink className="text-muted-foreground/40 group-hover:text-sage h-3.5 w-3.5 shrink-0 transition-all duration-300" />
-    </a>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex h-24 w-24 items-center justify-center transition-all duration-300 hover:-translate-y-1"
+        >
+          <Image
+            src={logo}
+            alt={name}
+            className="h-full w-auto max-w-full object-contain opacity-50 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+          />
+        </a>
+      </TooltipTrigger>
+      <TooltipContent sideOffset={8}>
+        <p className="font-medium">{name}</p>
+        <p className="text-muted-foreground text-xs">{description}</p>
+      </TooltipContent>
+    </Tooltip>
   )
 }
 
@@ -100,11 +96,13 @@ const TrustBanner = () => {
       </div>
 
       {/* Marquee */}
-      <Marquee pauseOnHover className="[--duration:45s] [--gap:1.25rem]">
-        {trustPartners.map((partner) => (
-          <TrustCard key={partner.name} {...partner} />
-        ))}
-      </Marquee>
+      <TooltipProvider delayDuration={100}>
+        <Marquee pauseOnHover className="[--duration:40s] [--gap:8rem]">
+          {trustPartners.map((partner) => (
+            <TrustLogo key={partner.name} {...partner} />
+          ))}
+        </Marquee>
+      </TooltipProvider>
     </section>
   )
 }

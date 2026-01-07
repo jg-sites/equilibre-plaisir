@@ -5,7 +5,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-forest text-primary-foreground">
+    <footer className="bg-forest text-primary-foreground pb-20 md:pb-0">
       {/* Main Footer */}
       <div className="container-narrow section-padding py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-3 md:gap-12">
@@ -102,17 +102,22 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-primary-foreground/10 border-t">
-        <div className="container-narrow text-primary-foreground/60 flex flex-col items-center justify-between gap-4 py-6 text-sm md:flex-row">
-          <p className="flex items-center gap-1">
-            © {currentYear} Julien — Diététicien Nutritionniste. Fait avec
-            <Heart className="fill-terracotta text-terracotta h-3 w-3" />
-            en Bretagne.
-          </p>
+        <div className="container-narrow px-5 py-6 md:px-8">
+          <div className="text-primary-foreground/60 flex flex-col items-center gap-4 text-center text-sm md:flex-row md:justify-between md:text-left">
+            <p className="flex flex-wrap items-center justify-center gap-1 md:justify-start">
+              <span>© {currentYear} Julien — Diététicien Nutritionniste.</span>
+              <span className="flex items-center gap-1">
+                Fait avec
+                <Heart className="fill-terracotta text-terracotta inline-block h-3 w-3" />
+                en Bretagne.
+              </span>
+            </p>
 
-          {/* SEO Keywords */}
-          <p className="text-center text-xs md:text-right">
-            Diététicien Nutritionniste centre Bretagne | Nutritionniste Morbihan | Perte de poids Bretagne
-          </p>
+            {/* SEO Keywords - hidden on very small screens */}
+            <p className="hidden text-xs sm:block md:text-right">
+              Diététicien Nutritionniste centre Bretagne | Nutritionniste Morbihan
+            </p>
+          </div>
         </div>
       </div>
     </footer>

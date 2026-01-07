@@ -1,8 +1,15 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Mentions légales | Julien — Diététicien Nutritionniste",
+  title: "Mentions légales",
   description: "Mentions légales du site de Julien, diététicien nutritionniste en centre Bretagne.",
+  alternates: {
+    canonical: "/mentions-legales",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 }
 
 export default function MentionsLegalesPage() {

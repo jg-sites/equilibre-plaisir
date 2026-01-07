@@ -2,8 +2,15 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Conditions Générales de Vente | Julien — Diététicien Nutritionniste",
-  description: "Conditions générales de vente des prestations de diététique.",
+  title: "Conditions Générales de Vente",
+  description: "Conditions générales de vente des consultations diététiques à domicile en centre Bretagne.",
+  alternates: {
+    canonical: "/cgv",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 }
 
 export default function CGVPage() {

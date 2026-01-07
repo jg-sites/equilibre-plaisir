@@ -2,8 +2,15 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Politique de confidentialité | Julien — Diététicien Nutritionniste",
-  description: "Politique de confidentialité et protection des données personnelles.",
+  title: "Politique de confidentialité",
+  description: "Politique de confidentialité et protection des données personnelles du cabinet de diététique.",
+  alternates: {
+    canonical: "/politique-confidentialite",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 }
 
 export default function PolitiqueConfidentialitePage() {

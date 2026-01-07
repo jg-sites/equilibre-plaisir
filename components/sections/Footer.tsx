@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Heart } from "lucide-react"
 
 const Footer = () => {
@@ -40,6 +41,24 @@ const Footer = () => {
                 À propos
               </a>
               <a
+                href="#tarifs"
+                className="text-primary-foreground/80 hover:text-primary-foreground text-sm transition-colors"
+              >
+                Tarifs
+              </a>
+              <a
+                href="#faq"
+                className="text-primary-foreground/80 hover:text-primary-foreground text-sm transition-colors"
+              >
+                FAQ
+              </a>
+              <a
+                href="#temoignages"
+                className="text-primary-foreground/80 hover:text-primary-foreground text-sm transition-colors"
+              >
+                Témoignages
+              </a>
+              <a
                 href="#rdv"
                 className="text-primary-foreground/80 hover:text-primary-foreground text-sm transition-colors"
               >
@@ -58,24 +77,24 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-primary-foreground/50 text-sm font-medium tracking-widest uppercase">Informations</h4>
             <nav className="flex flex-col gap-2">
-              <a
-                href="#"
+              <Link
+                href="/mentions-legales"
                 className="text-primary-foreground/80 hover:text-primary-foreground text-sm transition-colors"
               >
                 Mentions légales
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/politique-confidentialite"
                 className="text-primary-foreground/80 hover:text-primary-foreground text-sm transition-colors"
               >
                 Politique de confidentialité
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/cgv"
                 className="text-primary-foreground/80 hover:text-primary-foreground text-sm transition-colors"
               >
                 CGV
-              </a>
+              </Link>
             </nav>
           </div>
         </div>

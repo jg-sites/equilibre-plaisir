@@ -4,7 +4,7 @@ import { useState } from "react"
 import { ChevronDown, GraduationCap, Heart, HelpCircle, Shield } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 
-import { faq } from "@/lib/config"
+import type { FAQItem } from "@/lib/config"
 import { cn } from "@/lib/utils"
 
 const iconMap = {
@@ -14,13 +14,13 @@ const iconMap = {
   question: HelpCircle,
 }
 
-const FAQItem = ({
+const FAQItemComponent = ({
   item,
   isOpen,
   onToggle,
   index,
 }: {
-  item: (typeof faq)[0]
+  item: FAQItem
   isOpen: boolean
   onToggle: () => void
   index: number
@@ -86,7 +86,11 @@ const FAQItem = ({
   )
 }
 
-const FAQSection = () => {
+interface FAQSectionProps {
+  faq: FAQItem[]
+}
+
+const FAQSection = ({ faq }: FAQSectionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
@@ -117,8 +121,8 @@ const FAQSection = () => {
 
         {/* FAQ Items */}
         <div className="mx-auto max-w-3xl space-y-4">
-          {faq.map((item, index) => (
-            <FAQItem
+          {(faq || []).map((item, index) => (
+            <FAQItemComponent
               key={index}
               item={item}
               index={index}

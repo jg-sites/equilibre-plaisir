@@ -4,10 +4,18 @@ import { useState } from "react"
 import { Quote, Star } from "lucide-react"
 import { motion } from "motion/react"
 
-import { testimonials } from "@/lib/config"
+import type { Testimonial } from "@/lib/config"
 
-const TestimonialsSection = () => {
+interface TestimonialsSectionProps {
+  testimonials: Testimonial[]
+}
+
+const TestimonialsSection = ({ testimonials }: TestimonialsSectionProps) => {
   const [activeIndex, setActiveIndex] = useState(0)
+
+  if (!testimonials || testimonials.length === 0) {
+    return null
+  }
 
   return (
     <section id="temoignages" className="section-padding bg-background">

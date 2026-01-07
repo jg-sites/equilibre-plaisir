@@ -6,9 +6,13 @@ import { motion } from "motion/react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
-import { contact } from "@/lib/config"
+import type { ContactInfo } from "@/lib/config"
 
-const ContactSection = () => {
+interface ContactSectionProps {
+  contact: ContactInfo
+}
+
+const ContactSection = ({ contact }: ContactSectionProps) => {
   const [showShareModal, setShowShareModal] = useState(false)
 
   // Shake detection for mobile easter egg

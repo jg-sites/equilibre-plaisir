@@ -1,9 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Image from "next/image"
 import { Calendar, Menu, X } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 
+import Logo from "@/components/assets/logo.svg"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
@@ -41,8 +43,8 @@ const Navigation = () => {
       >
         <div className="container-narrow flex items-center justify-between px-5 md:px-8">
           {/* Logo */}
-          <a href="#hero" className="text-foreground hover:text-sage font-serif text-xl transition-colors md:text-2xl">
-            Julien
+          <a href="#hero" className="transition-opacity hover:opacity-80">
+            <Image src={Logo} alt="Équilibre & Plaisir" height={56} className="md:h-[56px]" />
           </a>
 
           {/* Desktop Navigation */}

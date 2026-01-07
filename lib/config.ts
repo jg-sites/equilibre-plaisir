@@ -1,4 +1,5 @@
-import siteConfig from "@/content/site-config.json"
+import { client } from "@/sanity/lib/client"
+import { siteConfigQuery } from "@/sanity/lib/queries"
 
 // Types for the site configuration
 export interface ContactInfo {
@@ -41,14 +42,11 @@ export interface PricingCard {
   }
 }
 
-export interface PricingConfig {
-  cards: PricingCard[]
-  note: {
-    title: string
-    text: string
-    linkText: string
-    linkHref: string
-  }
+export interface PricingNote {
+  title: string
+  text: string
+  linkText: string
+  linkHref: string
 }
 
 export interface FAQItem {
@@ -65,40 +63,56 @@ export interface Testimonial {
   text: string
 }
 
-export interface OpeningHours {
-  weekdays: { days: string; hours: string }
-  saturday: { days: string; hours: string }
-  sunday: { days: string; hours: string }
+export interface OpeningHoursSlot {
+  days: string
+  hours: string
 }
 
 export interface SiteConfig {
-  contact: ContactInfo
-  pricing: PricingConfig
+  // Diététicien
+  name: string
+  jobTitle: string
+  phone: string
+  phoneLink: string
+  email: string
+  location: ContactInfo["location"]
+
+  // Tarifs
+  pricingCards: PricingCard[]
+  pricingNote: PricingNote
+
+  // FAQ
   faq: FAQItem[]
+
+  // Témoignages
   testimonials: Testimonial[]
-  openingHours: OpeningHours
+
+  // Horaires
+  horairesSemaine: OpeningHoursSlot
+  horairesSamedi: OpeningHoursSlot
+  horairesDimanche: OpeningHoursSlot
 }
 
-// Export the typed configuration
-export const config: SiteConfig = siteConfig as SiteConfig
-
-// Helper exports for convenience
-export const contact = config.contact
-export const pricing = config.pricing
-export const faq = config.faq
-export const testimonials = config.testimonials
-export const openingHours = config.openingHours
+// Fetch site configuration from Sanity
+export async function getSiteConfig(): Promise<SiteConfig | null> {
+  try {
+    const data = await client.fetch<SiteConfig>(siteConfigQuery)
+    return data
+  } catch {
+    return null
+  }
+}
 
 // Helper to parse hours string like "17:00 - 20:00" into { opens, closes }
-function parseHours(hoursStr: string): { opens: string; closes: string } | null {
-  if (hoursStr.toLowerCase() === "fermé") return null
+function parseHours(hoursStr: string | undefined): { opens: string; closes: string } | null {
+  if (!hoursStr || hoursStr.toLowerCase() === "fermé") return null
   const match = hoursStr.match(/(\d{2}:\d{2})\s*-\s*(\d{2}:\d{2})/)
   if (!match) return null
   return { opens: match[1], closes: match[2] }
 }
 
 // Generate JSON-LD openingHoursSpecification from config
-export function getOpeningHoursSpecification() {
+export function getOpeningHoursSpecification(config: SiteConfig) {
   const specs: Array<{
     "@type": "OpeningHoursSpecification"
     dayOfWeek: string | string[]
@@ -106,7 +120,7 @@ export function getOpeningHoursSpecification() {
     closes: string
   }> = []
 
-  const weekdaysHours = parseHours(openingHours.weekdays.hours)
+  const weekdaysHours = parseHours(config.horairesSemaine?.hours)
   if (weekdaysHours) {
     specs.push({
       "@type": "OpeningHoursSpecification",
@@ -115,7 +129,7 @@ export function getOpeningHoursSpecification() {
     })
   }
 
-  const saturdayHours = parseHours(openingHours.saturday.hours)
+  const saturdayHours = parseHours(config.horairesSamedi?.hours)
   if (saturdayHours) {
     specs.push({
       "@type": "OpeningHoursSpecification",
@@ -124,7 +138,7 @@ export function getOpeningHoursSpecification() {
     })
   }
 
-  const sundayHours = parseHours(openingHours.sunday.hours)
+  const sundayHours = parseHours(config.horairesDimanche?.hours)
   if (sundayHours) {
     specs.push({
       "@type": "OpeningHoursSpecification",
@@ -134,4 +148,33 @@ export function getOpeningHoursSpecification() {
   }
 
   return specs
+}
+
+// Helper to get contact info in the old format for backward compatibility
+export function getContactInfo(config: SiteConfig): ContactInfo {
+  return {
+    name: config.name,
+    jobTitle: config.jobTitle,
+    phone: config.phone,
+    phoneLink: config.phoneLink,
+    email: config.email,
+    location: config.location,
+  }
+}
+
+// Helper to get pricing config in the old format
+export function getPricingConfig(config: SiteConfig) {
+  return {
+    cards: config.pricingCards || [],
+    note: config.pricingNote,
+  }
+}
+
+// Helper to get opening hours in the old format
+export function getOpeningHours(config: SiteConfig) {
+  return {
+    weekdays: config.horairesSemaine,
+    saturday: config.horairesSamedi,
+    sunday: config.horairesDimanche,
+  }
 }

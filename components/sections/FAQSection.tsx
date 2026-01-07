@@ -1,47 +1,31 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, GraduationCap, Heart, Shield } from "lucide-react"
+import { ChevronDown, GraduationCap, Heart, HelpCircle, Shield } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 
+import { faq } from "@/lib/config"
 import { cn } from "@/lib/utils"
 
-const faqs = [
-  {
-    icon: Heart,
-    question: "Pourquoi 50€ pour une consultation ?",
-    answer:
-      "Ce tarif reflète un accompagnement de qualité : une consultation d'une heure complète, un plan alimentaire 100% personnalisé, des déplacements à domicile inclus dans la zone d'intervention, et un suivi entre les séances. Contrairement aux consultations express de 15 minutes, je prends le temps de comprendre votre quotidien, vos contraintes et vos objectifs pour construire ensemble une solution durable.",
-    highlight: "Qualité & sur-mesure",
-  },
-  {
-    icon: GraduationCap,
-    question: "Êtes-vous remboursé par la Sécurité sociale ?",
-    answer:
-      'En tant que diététicien nutritionniste titulaire d\'un Diplôme d\'État (BTS Diététique), ma profession est reconnue par l\'État et réglementée par le Code de la Santé Publique. Bien que la Sécurité sociale ne rembourse pas encore systématiquement les consultations diététiques, de nombreuses mutuelles proposent des forfaits "médecines douces" ou "prévention santé" qui couvrent tout ou partie des séances.',
-    highlight: "Diplôme d'État",
-  },
-  {
-    icon: Shield,
-    question: "Comment savoir si ma mutuelle rembourse ?",
-    answer:
-      'Je vous recommande de contacter votre mutuelle et de demander si vous bénéficiez d\'un forfait "diététique", "prévention" ou "médecines douces". La plupart des mutuelles remboursent entre 1 et 6 séances par an, généralement entre 25€ et 50€ par consultation. Je vous fournis une facture conforme pour votre demande de remboursement.',
-    highlight: "Prise en charge",
-  },
-]
+const iconMap = {
+  heart: Heart,
+  graduation: GraduationCap,
+  shield: Shield,
+  question: HelpCircle,
+}
 
 const FAQItem = ({
-  faq,
+  item,
   isOpen,
   onToggle,
   index,
 }: {
-  faq: (typeof faqs)[0]
+  item: (typeof faq)[0]
   isOpen: boolean
   onToggle: () => void
   index: number
 }) => {
-  const Icon = faq.icon
+  const Icon = iconMap[item.icon]
 
   return (
     <motion.div
@@ -68,9 +52,9 @@ const FAQItem = ({
         {/* Content */}
         <div className="flex-1">
           <div className="mb-1 flex items-center gap-2">
-            <span className="text-sage text-xs font-medium">{faq.highlight}</span>
+            <span className="text-sage text-xs font-medium">{item.highlight}</span>
           </div>
-          <h3 className="text-foreground pr-8 font-serif text-lg md:text-xl">{faq.question}</h3>
+          <h3 className="text-foreground pr-8 font-serif text-lg md:text-xl">{item.question}</h3>
         </div>
 
         {/* Chevron */}
@@ -94,7 +78,7 @@ const FAQItem = ({
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="text-muted-foreground px-6 pb-6 pl-20 leading-relaxed">{faq.answer}</div>
+            <div className="text-muted-foreground px-6 pb-6 pl-20 leading-relaxed">{item.answer}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -133,10 +117,10 @@ const FAQSection = () => {
 
         {/* FAQ Items */}
         <div className="mx-auto max-w-3xl space-y-4">
-          {faqs.map((faq, index) => (
+          {faq.map((item, index) => (
             <FAQItem
               key={index}
-              faq={faq}
+              item={item}
               index={index}
               isOpen={openIndex === index}
               onToggle={() => setOpenIndex(openIndex === index ? null : index)}

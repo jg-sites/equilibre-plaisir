@@ -4,29 +4,7 @@ import { useState } from "react"
 import { Quote, Star } from "lucide-react"
 import { motion } from "motion/react"
 
-const testimonials = [
-  {
-    name: "Marie-Claire",
-    location: "Centre Bretagne",
-    rating: 5,
-    text: "Après des années de régimes yo-yo, j'ai enfin trouvé un équilibre. Julien m'a appris à écouter mon corps sans culpabilité. Merci infiniment !",
-    highlight: "j'ai enfin trouvé un équilibre",
-  },
-  {
-    name: "Philippe",
-    location: "Locminé",
-    rating: 5,
-    text: "Sceptique au départ, je suis bluffé par les résultats. -12kg en 6 mois, sans jamais avoir faim. L'approche de Julien est vraiment différente.",
-    highlight: "-12kg en 6 mois",
-  },
-  {
-    name: "Nathalie",
-    location: "Loudéac",
-    rating: 5,
-    text: "Ce que j'apprécie le plus ? L'absence de jugement. On avance à mon rythme, on s'adapte à ma vie. Ça change tout.",
-    highlight: "L'absence de jugement",
-  },
-]
+import { testimonials } from "@/lib/config"
 
 const TestimonialsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0)

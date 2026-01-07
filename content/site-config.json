@@ -1,0 +1,95 @@
+{
+  "contact": {
+    "name": "Julien",
+    "jobTitle": "Diététicien Nutritionniste",
+    "phone": "06 00 00 00 00",
+    "phoneLink": "+33600000000",
+    "email": "julien.dieteticien@gmail.com",
+    "location": {
+      "city": "Pontivy",
+      "postalCode": "56300",
+      "region": "Bretagne",
+      "country": "FR",
+      "coordinates": {
+        "latitude": 48.0667,
+        "longitude": -2.9833
+      },
+      "interventionRadius": "30"
+    }
+  },
+  "pricing": {
+    "cards": [
+      {
+        "id": "consultation",
+        "title": "Consultation diététique",
+        "subtitle": "Première consultation ou suivi",
+        "price": 50,
+        "currency": "€",
+        "priceLabel": "/ séance",
+        "featured": true,
+        "badge": "Prise en charge possible",
+        "features": [
+          { "icon": "clock", "text": "Consultation d'1 heure" },
+          { "icon": "message", "text": "Bilan personnalisé complet" },
+          { "icon": "users", "text": "Plan alimentaire sur mesure" },
+          { "icon": "heart", "text": "Suivi entre les séances" }
+        ],
+        "cta": {
+          "text": "Réserver ma consultation",
+          "href": "#contact"
+        }
+      }
+    ],
+    "note": {
+      "title": "Bon à savoir :",
+      "text": "Certaines mutuelles remboursent les consultations diététiques.",
+      "linkText": "Me contacter pour en savoir plus",
+      "linkHref": "#contact"
+    }
+  },
+  "faq": [
+    {
+      "icon": "heart",
+      "question": "Pourquoi 50€ pour une consultation ?",
+      "answer": "Ce tarif reflète un accompagnement de qualité : une consultation d'une heure complète, un plan alimentaire 100% personnalisé, des déplacements à domicile inclus dans la zone d'intervention, et un suivi entre les séances. Contrairement aux consultations express de 15 minutes, je prends le temps de comprendre votre quotidien, vos contraintes et vos objectifs pour construire ensemble une solution durable.",
+      "highlight": "Qualité & sur-mesure"
+    },
+    {
+      "icon": "graduation",
+      "question": "Êtes-vous remboursé par la Sécurité sociale ?",
+      "answer": "En tant que diététicien nutritionniste titulaire d'un Diplôme d'État (BTS Diététique), ma profession est reconnue par l'État et réglementée par le Code de la Santé Publique. Bien que la Sécurité sociale ne rembourse pas encore systématiquement les consultations diététiques, de nombreuses mutuelles proposent des forfaits \"médecines douces\" ou \"prévention santé\" qui couvrent tout ou partie des séances.",
+      "highlight": "Diplôme d'État"
+    },
+    {
+      "icon": "shield",
+      "question": "Comment savoir si ma mutuelle rembourse ?",
+      "answer": "Je vous recommande de contacter votre mutuelle et de demander si vous bénéficiez d'un forfait \"diététique\", \"prévention\" ou \"médecines douces\". La plupart des mutuelles remboursent entre 1 et 6 séances par an, généralement entre 25€ et 50€ par consultation. Je vous fournis une facture conforme pour votre demande de remboursement.",
+      "highlight": "Prise en charge"
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Marie-Claire",
+      "location": "Centre Bretagne",
+      "rating": 5,
+      "text": "Après des années de régimes yo-yo, j'ai enfin trouvé un équilibre. Julien m'a appris à écouter mon corps sans culpabilité. Merci infiniment !"
+    },
+    {
+      "name": "Philippe",
+      "location": "Locminé",
+      "rating": 5,
+      "text": "Sceptique au départ, je suis bluffé par les résultats. -12kg en 6 mois, sans jamais avoir faim. L'approche de Julien est vraiment différente."
+    },
+    {
+      "name": "Nathalie",
+      "location": "Loudéac",
+      "rating": 5,
+      "text": "Ce que j'apprécie le plus ? L'absence de jugement. On avance à mon rythme, on s'adapte à ma vie. Ça change tout."
+    }
+  ],
+  "openingHours": {
+    "weekdays": { "days": "Lundi - Vendredi", "hours": "17:00 - 20:00" },
+    "saturday": { "days": "Samedi", "hours": "Fermé" },
+    "sunday": { "days": "Dimanche", "hours": "Fermé" }
+  }
+}

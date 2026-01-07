@@ -11,6 +11,7 @@ import ServicesSection from "@/components/sections/ServicesSection"
 import TestimonialsSection from "@/components/sections/TestimonialsSection"
 import TrustBanner from "@/components/sections/TrustBanner"
 import { env } from "@/env.mjs"
+import { contact, faq, getOpeningHoursSpecification, pricing } from "@/lib/config"
 
 const baseUrl = env.NEXT_PUBLIC_BASE_URL
 
@@ -18,47 +19,34 @@ const jsonLdLocalBusiness = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "MedicalBusiness", "HealthAndBeautyBusiness"],
   "@id": `${baseUrl}/#business`,
-  name: "Julien - Diététicien Nutritionniste",
+  name: `${contact.name} - ${contact.jobTitle}`,
   description:
     "Diététicien nutritionniste diplômé en centre Bretagne. Accompagnement personnalisé pour perdre du poids sans frustration. Consultations à domicile.",
   url: baseUrl,
   image: `${baseUrl}/og-image.png`,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Loudéac",
-    postalCode: "22600",
-    addressRegion: "Bretagne",
-    addressCountry: "FR",
+    addressLocality: contact.location.city,
+    postalCode: contact.location.postalCode,
+    addressRegion: contact.location.region,
+    addressCountry: contact.location.country,
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 48.1783,
-    longitude: -2.7536,
+    latitude: contact.location.coordinates.latitude,
+    longitude: contact.location.coordinates.longitude,
   },
   areaServed: {
     "@type": "GeoCircle",
     geoMidpoint: {
       "@type": "GeoCoordinates",
-      latitude: 48.1783,
-      longitude: -2.7536,
+      latitude: contact.location.coordinates.latitude,
+      longitude: contact.location.coordinates.longitude,
     },
-    geoRadius: "30000",
+    geoRadius: `${Number(contact.location.interventionRadius) * 1000}`,
   },
-  email: "julien.dieteticien@gmail.com",
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "19:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Saturday",
-      opens: "09:00",
-      closes: "12:00",
-    },
-  ],
+  email: contact.email,
+  openingHoursSpecification: getOpeningHoursSpecification(),
   priceRange: "€",
   currenciesAccepted: "EUR",
   paymentAccepted: "Cash, Check, Bank Transfer",
@@ -66,18 +54,16 @@ const jsonLdLocalBusiness = {
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Services de diététique",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Consultation diététique",
-          description: "Bilan nutritionnel complet et accompagnement personnalisé à domicile",
-        },
-        price: "50",
-        priceCurrency: "EUR",
+    itemListElement: pricing.cards.map((card) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: card.title,
+        description: card.subtitle,
       },
-    ],
+      price: String(card.price),
+      priceCurrency: "EUR",
+    })),
   },
 }
 
@@ -85,9 +71,9 @@ const jsonLdPerson = {
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": `${baseUrl}/#person`,
-  name: "Julien",
-  jobTitle: "Diététicien Nutritionniste",
-  description: "Diététicien nutritionniste diplômé d'État exerçant en centre Bretagne",
+  name: contact.name,
+  jobTitle: contact.jobTitle,
+  description: `${contact.jobTitle} diplômé d'État exerçant en centre Bretagne`,
   knowsAbout: [
     "Nutrition",
     "Diététique",
@@ -103,32 +89,14 @@ const jsonLdPerson = {
 const jsonLdFAQ = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Comment se déroule une consultation diététique ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "La première consultation dure environ 1 heure et comprend un bilan nutritionnel complet, l'analyse de vos habitudes alimentaires, la définition de vos objectifs et la remise d'un plan alimentaire personnalisé.",
-      },
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
     },
-    {
-      "@type": "Question",
-      name: "Les consultations sont-elles remboursées ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Les consultations diététiques ne sont pas remboursées par la Sécurité sociale sauf cas particuliers. Cependant, de nombreuses mutuelles proposent un forfait de remboursement.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Quelle est la zone d'intervention ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Les consultations à domicile sont proposées dans un rayon de 30 km autour de Loudéac, en centre Bretagne (Morbihan, Côtes d'Armor).",
-      },
-    },
-  ],
+  })),
 }
 
 const jsonLdBreadcrumb = {

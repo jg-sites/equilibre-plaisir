@@ -6,6 +6,7 @@ import { motion } from "motion/react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
+import { contact } from "@/lib/config"
 
 const ContactSection = () => {
   const [showShareModal, setShowShareModal] = useState(false)
@@ -114,7 +115,7 @@ const ContactSection = () => {
 
             {/* Phone */}
             <a
-              href="tel:+33600000000"
+              href={`tel:${contact.phoneLink}`}
               className="bg-background shadow-soft hover:shadow-card group flex items-start gap-4 rounded-2xl p-5 transition-all duration-300"
             >
               <div className="bg-sage/10 group-hover:bg-sage/20 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors">
@@ -122,14 +123,14 @@ const ContactSection = () => {
               </div>
               <div>
                 <h3 className="text-foreground mb-1 font-serif text-lg">Téléphone</h3>
-                <p className="text-muted-foreground">06 00 00 00 00</p>
+                <p className="text-muted-foreground">{contact.phone}</p>
                 <p className="text-sage mt-2 text-sm">Appeler maintenant</p>
               </div>
             </a>
 
             {/* Email */}
             <a
-              href="mailto:julien.dieteticien@gmail.com"
+              href={`mailto:${contact.email}`}
               className="bg-background shadow-soft hover:shadow-card group flex items-start gap-4 rounded-2xl p-5 transition-all duration-300"
             >
               <div className="bg-sage/10 group-hover:bg-sage/20 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors">
@@ -137,7 +138,7 @@ const ContactSection = () => {
               </div>
               <div>
                 <h3 className="text-foreground mb-1 font-serif text-lg">Email</h3>
-                <p className="text-muted-foreground">julien.dieteticien@gmail.com</p>
+                <p className="text-muted-foreground">{contact.email}</p>
                 <p className="text-sage mt-2 text-sm">Réponse sous 24h</p>
               </div>
             </a>

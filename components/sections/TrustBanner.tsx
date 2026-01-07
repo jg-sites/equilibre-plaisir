@@ -70,6 +70,8 @@ const TrustLogo = ({ name, description, url, logo }: TrustPartner) => {
           <Image
             src={logo}
             alt={name}
+            width={96}
+            height={96}
             className="h-full w-auto max-w-full object-contain opacity-50 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
           />
         </a>

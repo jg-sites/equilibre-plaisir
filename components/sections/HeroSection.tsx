@@ -82,7 +82,7 @@ const HeroSection = () => {
             <Button variant="hero" size="xl" asChild className="group">
               <a href="#rdv">
                 <Calendar className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                Prendre RDV gratuitement
+                Prendre RDV
               </a>
             </Button>
             <Button variant="heroSecondary" size="lg" asChild>
@@ -102,11 +102,11 @@ const HeroSection = () => {
               Diplôme d'État
             </span>
             <span className="flex items-center gap-2">
-              <span className="bg-sage h-1.5 w-1.5 rounded-full" />
-              Prise en charge possible
+              <span className="bg-sage h-1.5 w-1.5 rounded-full" />À domicile
             </span>
             <span className="flex items-center gap-2">
-              <span className="bg-sage h-1.5 w-1.5 rounded-full" />À domicile
+              <span className="bg-sage h-1.5 w-1.5 rounded-full" />
+              Remboursement mutuelle possible
             </span>
           </motion.div>
         </motion.div>

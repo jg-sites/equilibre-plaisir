@@ -138,7 +138,7 @@ const Navigation = () => {
         <Button variant="cta" className="w-full" asChild>
           <a href="#rdv">
             <Calendar className="mr-2 h-5 w-5" />
-            Prendre RDV gratuitement
+            Prendre RDV
           </a>
         </Button>
       </motion.div>

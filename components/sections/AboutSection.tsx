@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { Award, Euro, HeartHandshake } from "lucide-react"
+import { Award, Euro, HeartHandshake, User } from "lucide-react"
 import { motion } from "motion/react"
 
 import julienPortrait from "@/components/assets/julien-portrait.jpg"
@@ -9,11 +9,15 @@ import julienPortrait from "@/components/assets/julien-portrait.jpg"
 const badges = [
   {
     icon: Award,
-    label: "Diplôme d'État",
+    label: "Diplôme reconnu par l'État",
+  },
+  { icon: Euro, label: "Prise en charge possible", href: "#faq" },
+  {
+    icon: User,
+    label: "Inscrit répertoire des professionnels de santé",
     href: "https://annuaire.esante.gouv.fr/pp/detail/10111573720?exeProId=6533917",
     external: true,
   },
-  { icon: Euro, label: "Prise en charge possible", href: "#faq" },
   { icon: HeartHandshake, label: "Approche bienveillante" },
 ]
 
@@ -32,11 +36,11 @@ const AboutSection = () => {
           >
             <div className="relative">
               {/* Decorative background */}
-              <div className="bg-sage/10 absolute -inset-4 -rotate-3 rounded-[2rem]" />
-              <div className="bg-terracotta/10 absolute -inset-4 rotate-2 rounded-[2rem]" />
+              <div className="bg-sage/10 absolute -inset-4 -rotate-3 rounded-4xl" />
+              <div className="bg-terracotta/10 absolute -inset-4 rotate-2 rounded-4xl" />
 
               {/* Main image */}
-              <div className="shadow-elevated relative aspect-[4/5] overflow-hidden rounded-3xl">
+              <div className="shadow-elevated relative aspect-4/5 overflow-hidden rounded-3xl">
                 <Image
                   src={julienPortrait}
                   alt="Julien, diététicien nutritionniste en centre Bretagne"
@@ -44,7 +48,7 @@ const AboutSection = () => {
                   className="object-cover object-top"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
-                <div className="from-forest/20 absolute inset-0 bg-gradient-to-t to-transparent" />
+                <div className="from-forest/20 absolute inset-0 bg-linear-to-t to-transparent" />
               </div>
             </div>
 
@@ -56,8 +60,8 @@ const AboutSection = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="bg-background shadow-card absolute -right-4 -bottom-4 rounded-2xl p-4 md:-right-8 md:bottom-8"
             >
-              <p className="text-muted-foreground text-sm">Adhérent</p>
-              <p className="text-foreground font-serif text-lg">AFDN</p>
+              <p className="text-muted-foreground text-sm">Diplômé d'État</p>
+              <p className="text-foreground font-serif text-lg">BTS Diététique</p>
             </motion.div>
           </motion.div>
 
@@ -87,10 +91,13 @@ const AboutSection = () => {
                 pression — juste un accompagnement humain.
               </p>
               <p>
-                <span className="text-foreground font-medium">Adhérent AFDN</span> (Association Française des
-                Diététiciens Nutritionnistes), je propose également un accompagnement en{" "}
+                Je propose également un accompagnement en{" "}
                 <span className="text-foreground font-medium">alimentation thérapeutique</span> : diabète, maladies
                 cardiovasculaires, pathologies digestives, allergies alimentaires...
+              </p>
+              <p>
+                <span className="text-foreground font-medium">Adhérent AFDN</span> (Association Française des
+                Diététiciens Nutritionnistes)
               </p>
             </div>
 

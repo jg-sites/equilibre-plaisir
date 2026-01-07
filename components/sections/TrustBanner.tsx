@@ -6,7 +6,6 @@ import logoAfdn from "@/components/assets/partenaires-afdn.png"
 import logoAnses from "@/components/assets/partenaires-anses.png"
 import logoCerin from "@/components/assets/partenaires-cerin.png"
 import logoMangerBouger from "@/components/assets/partenaires-mangerbouger.png"
-import logoProduitsLaitiers from "@/components/assets/partenaires-produitslaitiers.png"
 import logoSpf from "@/components/assets/partenaires-spf.png"
 import { Marquee } from "@/components/ui/marquee"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
@@ -17,12 +16,6 @@ const trustPartners = [
     description: "Programme National Nutrition Santé",
     url: "https://www.mangerbouger.fr/",
     logo: logoMangerBouger,
-  },
-  {
-    name: "Les Produits Laitiers",
-    description: "Informations nutritionnelles",
-    url: "https://www.produits-laitiers.com/",
-    logo: logoProduitsLaitiers,
   },
   {
     name: "AFDN",
@@ -94,7 +87,7 @@ const TrustBanner = () => {
       {/* Header */}
       <div className="mb-8 text-center">
         <p className="text-sage text-xs font-medium tracking-widest uppercase">Références</p>
-        <p className="text-muted-foreground mt-1 text-sm">Sources et partenaires de confiance</p>
+        <p className="text-muted-foreground mt-1 text-sm">Sources et références de confiance</p>
       </div>
 
       {/* Marquee */}

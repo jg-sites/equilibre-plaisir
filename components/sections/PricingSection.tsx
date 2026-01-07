@@ -1,6 +1,17 @@
 "use client"
 
-import { Calendar, Check, Clock, Heart, MessageCircle, Sparkles, Users } from "lucide-react"
+import {
+  Banknote,
+  Calendar,
+  Clock,
+  CreditCard,
+  FileText,
+  Heart,
+  MessageCircle,
+  Sparkles,
+  Users,
+  Wallet,
+} from "lucide-react"
 import { motion } from "motion/react"
 
 import { Button } from "@/components/ui/button"
@@ -51,7 +62,15 @@ const PricingSection = ({ pricing }: PricingSectionProps) => {
 
         {/* Pricing Cards */}
         {cards.length > 0 && (
-          <div className={`mx-auto ${cards.length === 1 ? "max-w-lg" : "grid max-w-4xl gap-8 md:grid-cols-2"}`}>
+          <div
+            className={`mx-auto ${
+              cards.length === 1
+                ? "max-w-lg"
+                : cards.length === 2
+                  ? "grid max-w-4xl gap-8 md:grid-cols-2"
+                  : "grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
             {cards.map((card, cardIndex) => (
               <motion.div
                 key={card.id}
@@ -68,13 +87,13 @@ const PricingSection = ({ pricing }: PricingSectionProps) => {
 
                   {/* Main card */}
                   <div
-                    className={`relative h-full overflow-hidden rounded-3xl border p-8 shadow-lg md:p-10 ${
+                    className={`relative h-full overflow-hidden rounded-3xl border p-6 shadow-lg md:p-8 ${
                       card.featured ? "border-sage/20 bg-background" : "border-border bg-card"
                     }`}
                   >
                     {/* Badge */}
                     {card.badge && (
-                      <div className="absolute top-6 right-6">
+                      <div className="absolute top-3 right-6">
                         <span className="bg-sage/10 text-sage inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium">
                           <Sparkles className="h-3 w-3" />
                           {card.badge}
@@ -89,8 +108,8 @@ const PricingSection = ({ pricing }: PricingSectionProps) => {
                     </div>
 
                     {/* Price */}
-                    <div className="mb-8 flex items-baseline gap-2">
-                      <span className="text-sage font-serif text-6xl font-medium md:text-7xl">{card.price}</span>
+                    <div className="mb-6 flex items-baseline gap-2">
+                      <span className="text-sage font-serif text-5xl font-medium md:text-6xl">{card.price}</span>
                       <div className="flex flex-col">
                         <span className="text-foreground text-2xl font-medium">{card.currency}</span>
                         <span className="text-muted-foreground text-sm">{card.priceLabel}</span>
@@ -98,10 +117,10 @@ const PricingSection = ({ pricing }: PricingSectionProps) => {
                     </div>
 
                     {/* Divider */}
-                    <div className="bg-border mb-8 h-px" />
+                    <div className="bg-border mb-6 h-px" />
 
                     {/* Features */}
-                    <ul className="mb-8 space-y-4">
+                    <ul className="mb-6 space-y-3">
                       {(card.features || []).map((feature, index) => {
                         const IconComponent = iconMap[feature.icon]
                         return (
@@ -123,24 +142,49 @@ const PricingSection = ({ pricing }: PricingSectionProps) => {
                     </ul>
 
                     {/* CTA */}
-                    <Button variant="hero" size="xl" className="group/btn w-full" asChild>
-                      <a href={card.cta?.href || "#contact"}>
-                        <Calendar className="mr-2 h-5 w-5 transition-transform group-hover/btn:scale-110" />
-                        {card.cta?.text || "Réserver"}
-                      </a>
-                    </Button>
-
-                    {/* Trust note */}
-                    <p className="text-muted-foreground mt-6 flex items-center justify-center gap-2 text-center text-sm">
-                      <Check className="text-sage h-4 w-4" />
-                      Sans engagement, annulation gratuite
-                    </p>
+                    {card.cta?.text && (
+                      <Button variant="hero" size="xl" className="group/btn w-full" asChild>
+                        <a href={card.cta?.href || "#contact"}>
+                          <Calendar className="mr-2 h-5 w-5 transition-transform group-hover/btn:scale-110" />
+                          {card.cta.text}
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
         )}
+
+        {/* Payment methods */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-10 text-center"
+        >
+          <p className="text-muted-foreground mb-3 text-sm">Moyens de paiement acceptés</p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="text-muted-foreground flex items-center gap-2">
+              <CreditCard className="h-4 w-4" />
+              <span className="text-sm">Carte bancaire</span>
+            </div>
+            <div className="text-muted-foreground flex items-center gap-2">
+              <Banknote className="h-4 w-4" />
+              <span className="text-sm">Espèces</span>
+            </div>
+            <div className="text-muted-foreground flex items-center gap-2">
+              <Wallet className="h-4 w-4" />
+              <span className="text-sm">Virement</span>
+            </div>
+            <div className="text-muted-foreground flex items-center gap-2">
+              <FileText className="h-4 w-4" />
+              <span className="text-sm">Chèque</span>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Additional info */}
         {note && (
@@ -149,7 +193,7 @@ const PricingSection = ({ pricing }: PricingSectionProps) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 text-center"
+            className="mt-8 text-center"
           >
             <div className="bg-beige/50 mx-auto inline-flex flex-col items-center gap-2 rounded-2xl px-6 py-4 sm:flex-row sm:gap-4">
               <span className="text-muted-foreground text-sm">

@@ -9,7 +9,10 @@ import { Button } from "@/components/ui/button"
 
 const HeroSection = () => {
   return (
-    <section id="hero" className="gradient-hero relative flex min-h-screen items-center justify-center overflow-hidden">
+    <section
+      id="hero"
+      className="gradient-hero relative flex min-h-svh items-start justify-center overflow-hidden pt-0 md:items-center"
+    >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <Image
@@ -28,7 +31,7 @@ const HeroSection = () => {
       <div className="bg-terracotta/10 absolute right-20 bottom-40 h-48 w-48 rounded-full blur-3xl" />
 
       {/* Content */}
-      <div className="container-narrow section-padding relative z-10 text-center">
+      <div className="container-narrow section-padding relative z-10 mt-12 text-center md:mt-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -95,7 +98,7 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.6 }}
-            className="text-muted-foreground flex flex-wrap justify-center gap-6 pt-8 text-sm"
+            className="text-muted-foreground mt-4 flex flex-wrap justify-center gap-3 text-sm md:mt-8 md:gap-6"
           >
             <span className="flex items-center gap-2">
               <span className="bg-sage h-1.5 w-1.5 rounded-full" />
@@ -116,7 +119,7 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.6 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 pt-4 md:bottom-8 md:pt-0"
         >
           <a
             href="#approche"

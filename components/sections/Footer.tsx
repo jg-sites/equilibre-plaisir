@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Heart } from "lucide-react"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -107,9 +106,15 @@ const Footer = () => {
             <p className="flex flex-wrap items-center justify-center gap-1 md:justify-start">
               <span>© {currentYear} Julien — Diététicien Nutritionniste.</span>
               <span className="flex items-center gap-1">
-                Fait avec
-                <Heart className="fill-terracotta text-terracotta inline-block h-3 w-3" />
-                en Bretagne.
+                Propulsé par
+                <a
+                  href="https://voidcorp.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary-foreground/80 hover:text-primary-foreground underline underline-offset-2 transition-colors"
+                >
+                  Voidcorp
+                </a>
               </span>
             </p>
 

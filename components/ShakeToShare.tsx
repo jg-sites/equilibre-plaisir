@@ -22,6 +22,8 @@ export function ShakeToShare({
   const lastX = useRef<number | null>(null)
   const lastY = useRef<number | null>(null)
   const lastZ = useRef<number | null>(null)
+  const permissionRequested = useRef(false)
+  const motionListenerAdded = useRef(false)
 
   const share = useCallback(async () => {
     const shareUrl = url || (typeof window !== "undefined" ? window.location.href : "")
@@ -73,31 +75,61 @@ export function ShakeToShare({
       lastZ.current = z
     }
 
-    const requestPermission = async () => {
-      if (
-        typeof DeviceMotionEvent !== "undefined" &&
-        typeof (DeviceMotionEvent as unknown as { requestPermission?: () => Promise<string> }).requestPermission ===
-          "function"
-      ) {
-        try {
-          const permission = await (
-            DeviceMotionEvent as unknown as { requestPermission: () => Promise<string> }
-          ).requestPermission()
-          if (permission === "granted") {
-            window.addEventListener("devicemotion", handleMotion)
-          }
-        } catch {
-          // Permission denied or not supported
-        }
-      } else {
+    const addMotionListener = () => {
+      if (!motionListenerAdded.current) {
         window.addEventListener("devicemotion", handleMotion)
+        motionListenerAdded.current = true
       }
     }
 
-    requestPermission()
+    const needsPermission = () => {
+      return (
+        typeof DeviceMotionEvent !== "undefined" &&
+        typeof (DeviceMotionEvent as unknown as { requestPermission?: () => Promise<string> }).requestPermission ===
+          "function"
+      )
+    }
+
+    const requestPermission = async () => {
+      if (permissionRequested.current) return
+      permissionRequested.current = true
+
+      try {
+        const permission = await (
+          DeviceMotionEvent as unknown as { requestPermission: () => Promise<string> }
+        ).requestPermission()
+        if (permission === "granted") {
+          addMotionListener()
+        }
+      } catch {
+        // Permission denied or not supported
+      }
+    }
+
+    // iOS 13+ requires user interaction to request permission
+    const handleUserInteraction = () => {
+      if (needsPermission()) {
+        requestPermission()
+      }
+      // Remove listeners after first interaction
+      document.removeEventListener("touchstart", handleUserInteraction)
+      document.removeEventListener("click", handleUserInteraction)
+    }
+
+    if (needsPermission()) {
+      // Wait for user interaction on iOS
+      document.addEventListener("touchstart", handleUserInteraction, { once: true })
+      document.addEventListener("click", handleUserInteraction, { once: true })
+    } else {
+      // Non-iOS devices don't need permission
+      addMotionListener()
+    }
 
     return () => {
       window.removeEventListener("devicemotion", handleMotion)
+      document.removeEventListener("touchstart", handleUserInteraction)
+      document.removeEventListener("click", handleUserInteraction)
+      motionListenerAdded.current = false
     }
   }, [threshold, timeout, share])
 

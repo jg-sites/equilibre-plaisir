@@ -4,7 +4,7 @@ import { structureTool } from "sanity/structure"
 import { schemaTypes } from "./sanity/schemas"
 
 export default defineConfig({
-  name: "equilibre-et-plaisir",
+  name: "equilibre&plaisir",
   title: "equilibre&plaisir",
 
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "your-project-id",

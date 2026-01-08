@@ -1,25 +1,43 @@
 "use client"
 
 import Image from "next/image"
-import { Award, Euro, HeartHandshake, User } from "lucide-react"
-import { motion } from "motion/react"
+import { Award, ExternalLink, ShieldCheck } from "lucide-react"
+import { motion, type Variants } from "motion/react"
 
 import julienPortrait from "@/components/assets/julien-portrait.jpg"
 
 const badges = [
   {
     icon: Award,
-    label: "Diplôme reconnu par l'État",
+    label: "Diplômé d'État",
   },
-  { icon: Euro, label: "Prise en charge possible", href: "#faq" },
   {
-    icon: User,
-    label: "Inscrit répertoire des professionnels de santé",
+    icon: ShieldCheck,
+    label: "Profil officiel",
     href: "https://annuaire.esante.gouv.fr/pp/detail/10111573720?exeProId=6533917",
     external: true,
   },
-  { icon: HeartHandshake, label: "Approche bienveillante" },
 ]
+
+const fadeInLeft: Variants = {
+  initial: { opacity: 0, x: -50 },
+  whileInView: { opacity: 1, x: 0 },
+}
+
+const fadeInRight: Variants = {
+  initial: { opacity: 0, x: 50 },
+  whileInView: { opacity: 1, x: 0 },
+}
+
+const fadeInUp: Variants = {
+  initial: { opacity: 0, y: 10 },
+  whileInView: { opacity: 1, y: 0 },
+}
+
+const scaleIn: Variants = {
+  initial: { opacity: 0, scale: 0.8 },
+  whileInView: { opacity: 1, scale: 1 },
+}
 
 const AboutSection = () => {
   return (
@@ -28,8 +46,9 @@ const AboutSection = () => {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Image */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={fadeInLeft}
+            initial="initial"
+            whileInView="whileInView"
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
             className="relative"
@@ -54,21 +73,25 @@ const AboutSection = () => {
 
             {/* Floating badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              variants={scaleIn}
+              initial="initial"
+              whileInView="whileInView"
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
+              role="complementary"
+              aria-label="Certification"
               className="bg-background shadow-card absolute -right-4 -bottom-4 rounded-2xl p-4 md:-right-8 md:bottom-8"
             >
-              <p className="text-muted-foreground text-sm">Diplômé d'État</p>
-              <p className="text-foreground font-serif text-lg">BTS Diététique</p>
+              <p className="text-muted-foreground text-sm">Professionnel de santé</p>
+              <p className="text-foreground font-serif text-lg">Diététicien diplômé</p>
             </motion.div>
           </motion.div>
 
           {/* Content */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={fadeInRight}
+            initial="initial"
+            whileInView="whileInView"
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
             className="space-y-6"
@@ -96,46 +119,44 @@ const AboutSection = () => {
                 cardiovasculaires, pathologies digestives, allergies alimentaires...
               </p>
               <p>
-                <span className="text-foreground font-medium">Adhérent AFDN</span> (Association Française des
-                Diététiciens Nutritionnistes)
+                <span className="text-foreground font-medium">
+                  Adhérent <abbr title="Association Française des Diététiciens Nutritionnistes">AFDN</abbr>
+                </span>{" "}
+                (Association Française des Diététiciens Nutritionnistes)
               </p>
             </div>
 
             {/* Badges */}
             <div className="flex flex-wrap gap-3 pt-4">
-              {badges.map((badge, index) => {
-                const BadgeContent = (
-                  <>
-                    <badge.icon className="text-sage h-4 w-4" />
-                    <span className="text-foreground text-sm">{badge.label}</span>
-                  </>
-                )
-
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                  >
-                    {badge.href ? (
-                      <a
-                        href={badge.href}
-                        target={badge.external ? "_blank" : undefined}
-                        rel={badge.external ? "noopener noreferrer" : undefined}
-                        className="bg-background shadow-soft hover:shadow-card flex items-center gap-2 rounded-full px-4 py-2 transition-all duration-300 hover:-translate-y-0.5"
-                      >
-                        {BadgeContent}
-                      </a>
-                    ) : (
-                      <div className="bg-background shadow-soft flex items-center gap-2 rounded-full px-4 py-2">
-                        {BadgeContent}
-                      </div>
-                    )}
-                  </motion.div>
-                )
-              })}
+              {badges.map((badge, index) => (
+                <motion.div
+                  key={badge.label}
+                  variants={fadeInUp}
+                  initial="initial"
+                  whileInView="whileInView"
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                >
+                  {badge.href ? (
+                    <a
+                      href={badge.href}
+                      target={badge.external ? "_blank" : undefined}
+                      rel={badge.external ? "noopener noreferrer" : undefined}
+                      aria-label={`${badge.label} (ouvre dans un nouvel onglet)`}
+                      className="bg-background shadow-soft hover:shadow-card flex items-center gap-2 rounded-full px-4 py-2 transition-all duration-300 hover:-translate-y-0.5"
+                    >
+                      <badge.icon className="text-sage h-4 w-4" />
+                      <span className="text-foreground text-sm">{badge.label}</span>
+                      <ExternalLink className="text-muted-foreground h-3 w-3" />
+                    </a>
+                  ) : (
+                    <div className="bg-background shadow-soft flex items-center gap-2 rounded-full px-4 py-2">
+                      <badge.icon className="text-sage h-4 w-4" />
+                      <span className="text-foreground text-sm">{badge.label}</span>
+                    </div>
+                  )}
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>

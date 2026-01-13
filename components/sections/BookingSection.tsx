@@ -46,8 +46,7 @@ const BookingSection = () => {
             "cal-border-booker": "#3d4a32",
           },
         },
-        hideEventTypeDetails: true,
-        layout: "column_view",
+        hideEventTypeDetails: false,
       })
     })()
   }, [])
@@ -85,9 +84,7 @@ const BookingSection = () => {
             namespace="15min"
             calOrigin="https://app.cal.com"
             calLink="julien-g/15min"
-            style={{ width: "100%", height: "100%", overflow: "hidden", minHeight: "500px" }}
             config={{
-              layout: "column_view",
               theme: "light",
             }}
           />

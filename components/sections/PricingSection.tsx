@@ -1,17 +1,6 @@
 "use client"
 
-import {
-  Banknote,
-  Calendar,
-  Clock,
-  CreditCard,
-  FileText,
-  Heart,
-  MessageCircle,
-  Sparkles,
-  Users,
-  Wallet,
-} from "lucide-react"
+import { Banknote, Calendar, Clock, CreditCard, Heart, MessageCircle, Sparkles, Users, Wallet } from "lucide-react"
 import { motion } from "motion/react"
 
 import { Button } from "@/components/ui/button"

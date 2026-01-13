@@ -22,25 +22,31 @@ export default function MentionsLegalesPage() {
           <h2 className="text-foreground mb-4 font-serif text-xl">1. Éditeur du site</h2>
           <div className="text-muted-foreground space-y-2">
             <p>
-              <strong className="text-foreground">Nom :</strong> [NOM PRÉNOM À COMPLÉTER]
+              <strong className="text-foreground">Nom :</strong> Julien Geantot
             </p>
             <p>
               <strong className="text-foreground">Profession :</strong> Diététicien Nutritionniste diplômé d'État
             </p>
             <p>
-              <strong className="text-foreground">N° ADELI :</strong> [NUMÉRO ADELI À COMPLÉTER]
+              <strong className="text-foreground">N° RPPS :</strong> 10111573720
             </p>
             <p>
-              <strong className="text-foreground">N° SIRET :</strong> [NUMÉRO SIRET À COMPLÉTER]
+              <strong className="text-foreground">N° SIRET :</strong> En cours d'immatriculation
             </p>
             <p>
-              <strong className="text-foreground">Adresse :</strong> [ADRESSE À COMPLÉTER]
+              <strong className="text-foreground">Adresse :</strong> 56300 Pontivy, Bretagne
             </p>
             <p>
-              <strong className="text-foreground">Téléphone :</strong> [TÉLÉPHONE À COMPLÉTER]
+              <strong className="text-foreground">Téléphone :</strong>{" "}
+              <a href="tel:+33625033955" className="text-sage hover:underline">
+                06 25 03 39 55
+              </a>
             </p>
             <p>
-              <strong className="text-foreground">Email :</strong> julien.dieteticien@gmail.com
+              <strong className="text-foreground">Email :</strong>{" "}
+              <a href="mailto:julien.dieteticien@gmail.com" className="text-sage hover:underline">
+                julien.dieteticien@gmail.com
+              </a>
             </p>
           </div>
         </section>

@@ -1,6 +1,8 @@
+import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 
+import Logo from "@/components/assets/logo.svg"
 import Footer from "@/components/sections/Footer"
 
 export default function LegalLayout({ children }: { children: React.ReactNode }) {
@@ -9,8 +11,8 @@ export default function LegalLayout({ children }: { children: React.ReactNode })
       {/* Header */}
       <header className="border-sage/10 bg-beige/50 border-b">
         <div className="container-narrow flex items-center justify-between px-5 py-4 md:px-8">
-          <Link href="/" className="text-foreground hover:text-sage font-serif text-xl transition-colors md:text-2xl">
-            Julien
+          <Link href="/" className="transition-opacity hover:opacity-80">
+            <Image src={Logo} alt="Équilibre & Plaisir" height={56} className="md:h-[56px]" />
           </Link>
           <Link
             href="/"

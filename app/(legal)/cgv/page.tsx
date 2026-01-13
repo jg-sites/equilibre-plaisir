@@ -28,11 +28,23 @@ export default function CGVPage() {
             </p>
             <div className="bg-beige/50 rounded-xl p-4">
               <p className="text-foreground mb-2 font-medium">Le prestataire :</p>
-              <p>[NOM PRÉNOM À COMPLÉTER]</p>
+              <p>Julien Geantot</p>
               <p>Diététicien Nutritionniste diplômé d'État</p>
-              <p>N° ADELI : [À COMPLÉTER]</p>
-              <p>N° SIRET : [À COMPLÉTER]</p>
-              <p>Email : julien.dieteticien@gmail.com</p>
+              <p>N° RPPS : 10111573720</p>
+              <p>N° SIRET : En cours d'immatriculation</p>
+              <p>Adresse : 56300 Pontivy, Bretagne</p>
+              <p>
+                Téléphone :{" "}
+                <a href="tel:+33625033955" className="text-sage hover:underline">
+                  06 25 03 39 55
+                </a>
+              </p>
+              <p>
+                Email :{" "}
+                <a href="mailto:julien.dieteticien@gmail.com" className="text-sage hover:underline">
+                  julien.dieteticien@gmail.com
+                </a>
+              </p>
             </div>
           </div>
         </section>
@@ -49,14 +61,15 @@ export default function CGVPage() {
           </ul>
           <p className="text-muted-foreground mt-4">
             Les consultations se déroulent à domicile, dans la zone d'intervention du praticien (centre Bretagne,
-            environ 30 km autour de Loudéac).
+            environ 30 km autour de Pontivy).
           </p>
         </section>
 
         <section className="bg-background shadow-soft rounded-2xl p-6 md:p-8">
           <h2 className="text-foreground mb-4 font-serif text-xl">Article 3 - Tarifs</h2>
-          <div className="bg-sage/10 mb-4 rounded-xl p-4">
-            <p className="text-foreground font-medium">Consultation diététique (1 heure) : 50 €</p>
+          <div className="bg-sage/10 mb-4 space-y-2 rounded-xl p-4">
+            <p className="text-foreground font-medium">Première consultation (bilan complet, 1 heure) : 50 €</p>
+            <p className="text-foreground font-medium">Consultation de suivi (45 min) : 35 €</p>
           </div>
           <div className="text-muted-foreground space-y-2">
             <p>Les tarifs sont exprimés en euros TTC (TVA non applicable, article 293 B du CGI).</p>
@@ -204,16 +217,24 @@ export default function CGVPage() {
         </section>
 
         <section className="bg-background shadow-soft rounded-2xl p-6 md:p-8">
-          <h2 className="text-foreground mb-4 font-serif text-xl">Article 13 - Litiges</h2>
+          <h2 className="text-foreground mb-4 font-serif text-xl">Article 13 - Litiges et médiation</h2>
           <div className="text-muted-foreground space-y-4">
             <p>
               En cas de litige, une solution amiable sera recherchée avant toute action judiciaire. À défaut d'accord
               amiable, les tribunaux français seront seuls compétents.
             </p>
             <p>
-              Conformément à l'article L.612-1 du Code de la consommation, le client peut recourir gratuitement à un
-              médiateur de la consommation en vue de la résolution amiable du litige.
+              Conformément aux articles L.616-1 et R.616-1 du Code de la consommation, le client peut recourir
+              gratuitement à un médiateur de la consommation en vue de la résolution amiable du litige.
             </p>
+            <div className="bg-beige/50 rounded-xl p-4">
+              <p className="text-foreground mb-2 font-medium">Médiateur de la consommation :</p>
+              <p>
+                Conformément à l'article L.612-1 du Code de la consommation, vous pouvez recourir gratuitement à un
+                médiateur de la consommation.
+              </p>
+              <p className="mt-2 italic">Médiateur en cours de désignation - coordonnées disponibles prochainement.</p>
+            </div>
           </div>
         </section>
 

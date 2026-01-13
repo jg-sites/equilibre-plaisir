@@ -89,7 +89,6 @@ export default function CGVPage() {
           <p className="text-muted-foreground mb-4">Le règlement s'effectue à la fin de chaque consultation par :</p>
           <ul className="text-muted-foreground list-inside list-disc space-y-2">
             <li>Espèces</li>
-            <li>Chèque à l'ordre de [NOM À COMPLÉTER]</li>
             <li>Virement bancaire</li>
           </ul>
           <p className="text-muted-foreground mt-4">

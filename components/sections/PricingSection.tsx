@@ -179,10 +179,6 @@ const PricingSection = ({ pricing }: PricingSectionProps) => {
               <Wallet className="h-4 w-4" />
               <span className="text-sm">Virement</span>
             </div>
-            <div className="text-muted-foreground flex items-center gap-2">
-              <FileText className="h-4 w-4" />
-              <span className="text-sm">Chèque</span>
-            </div>
           </div>
         </motion.div>
 
